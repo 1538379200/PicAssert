@@ -13,13 +13,15 @@ PicAsssert会将图片在全局做一次模板匹配行为，当查找的图片�
   ```pycon
   dr.set_window_size(1920, 1080)
 ```
+  Assert类中设置了max_window=True的选项时，会自动将浏览器大小放大为设置的init_dpi大小
   Assert类如果没有添加任何参数，则默认截取设备的全屏，可以在其他gui代码中运行，注意不能关闭当前显示的屏幕
 3、使用图片断言会返回一个布尔值，True为找到当前图片，False为未找到图片
+4、使用图片点击功能如不是无头模式，使用最大化浏览器或者设置浏览器为当前构建代码的设备分辨率尺寸，如果无头模式使用设置窗口大小为当前构建代码设备分辨率
 
 ## 调用方式
 实例化Assert类：
 ```pycon
-ps = Assert()  # ps = Assert(driver=driver)
+ps = Assert()  # ps = Assert(driver=driver, init_dpi=(1920, 1080), max_window=True)
 ps.assert_exist("./test.png", 0.7)
 ```
 assert_exist有两个形参
@@ -39,9 +41,7 @@ import time
 from PicAssert.Assert import Assert
 dr = driver()
 option.headless = True
-dr.set_window_size(1920, 1080)
-ps = Assert(dr)
-ps.InitDPI = (1920, 1080)
+ps = Assert(driver=dr, init_dpi=(1920, 1080), max_window=True)
 dr.get("https://www.baidu.com")
 time.sleep(2)
 p1_res = ps.assert_exist(r"D:\test.png")     # ps.assert_exist(r"D:\test.png", 0.8)
