@@ -3,7 +3,7 @@ with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 setuptools.setup(
     name="PicAssert",    # 包名
-    version="1.3.0",  # 版本
+    version="1.3.1",  # 版本
     author="测码范晔",   # 作者
     author_email="1538379200@qq.com",    # 邮箱
     description="图像断言工具",

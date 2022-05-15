@@ -2,7 +2,7 @@
 # PicAssert图片断言工具：
 anchor： 测码范晔
 联系邮箱： 1538379200@qq.com
-当前版本：v 1.3.0
+当前版本：v 1.3.1
 通过图片拓展断言方式
 > assert_exist会将图片在全局做一次模板匹配行为，当查找的图片大于或者等于设置的阈值的时候，程序将返回True，
 当全局匹配的图片匹配度低于所设置的阈值时，程序将启动特征匹配模式，对前面相似度较近的区域进行截图，再次进行特征分析，
@@ -131,7 +131,7 @@ class Assert:
             self.__driver.get_screenshot_as_file(shot_pic_path)
         return shot_pic_path
 
-    def assert_exist(self, *,  pic_path: str, threshold: Union[int, float] = 0.7) -> Union[bool, None]:
+    def assert_exist(self, pic_path: str, threshold: Union[int, float] = 0.7) -> Union[bool, None]:
         """
         进行图片匹配，判断是否存在此图片
         程序将先进行模板匹配，找到截图对应的区域，如果匹配值小于设定的阈值，程序会将最接近的区域进行截图，重新进行特征点匹配，也小于0.1才返回False
@@ -183,7 +183,7 @@ class Assert:
         finally:
             Path(pic_cache_path).unlink(missing_ok=True)
 
-    def assert_click(self, *,  pic_path: str, hwnd: Union[str, None] = None) -> Union[tuple, None]:
+    def assert_click(self, pic_path: str, hwnd: Union[str, None] = None) -> Union[tuple, None]:
         """
         通过图片查找坐标点进行点击，如果传入hwnd默认使用后台鼠标点击，
         hwnd代表窗口句柄，可以使用抓抓工具抓取需要的句柄传入，传入driver此项不用传入
